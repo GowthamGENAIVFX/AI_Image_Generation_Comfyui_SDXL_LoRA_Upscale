@@ -1,392 +1,219 @@
-
 # ComfyUI SDXL + LoRA + Upscaling Workflow
 
-## Overview
+A production-oriented ComfyUI workflow designed for high-quality image generation using Stable Diffusion XL, LoRA integration, and AI-powered upscaling.
 
-This project demonstrates a production-oriented ComfyUI workflow for generating high-quality photorealistic character imagery using SDXL, LoRA models, and image upscaling.
-
-The goal of this workflow is to create a reusable and scalable pipeline that can be used by artists for concept development, character exploration, marketing imagery, and previsualization.
+This project demonstrates practical workflow design principles used in Generative AI pipelines, focusing on scalability, reusability, and production efficiency.
 
 ---
 
-# Workflow Architecture
+## Project Overview
 
-```text
-Checkpoint Loader
-        │
-        ▼
-    LoRA Loader
-        │
- ┌──────┴──────┐
- ▼             ▼
-Positive     Negative
-Prompt       Prompt
-Encoder      Encoder
-      │      │
-      ▼      ▼
-       KSampler
-           │
-           ▼
-      VAE Decode
-           │
-           ▼
-       Upscaling
-           │
-           ▼
-       Save Image
-```
+This workflow was developed to explore and optimize image generation pipelines using ComfyUI while maintaining a balance between image quality, performance, and resource utilization.
+
+The workflow integrates:
+
+* Stable Diffusion XL (SDXL)
+* LoRA-based style enhancement
+* Prompt conditioning
+* Latent image generation
+* AI upscaling
+* Production workflow optimization
 
 ---
 
-# Workflow Screenshot
+## Architecture Diagram
+
+![Architecture Diagram](images/architecture-diagram.png)
+
+---
+
+## Workflow Graph
 
 ![Workflow](images/workflow.png)
 
 ---
 
-# Final Output
+## Sample Outputs
 
-![Output](images/final_output.png)
+### Output 01
 
----
+![Output 01](images/output-01.png)
 
-# Technologies Used
+### Output 02
 
-| Tool            | Purpose                         |
-| --------------- | ------------------------------- |
-| ComfyUI         | Node-based workflow system      |
-| SDXL Base Model | Core image generation           |
-| LoRA Models     | Style and character enhancement |
-| KSampler        | Diffusion sampling process      |
-| VAE Decoder     | Convert latent data into image  |
-| 4x UltraSharp   | Image upscaling                 |
-| Python          | Workflow customization          |
-| Git             | Version control                 |
+![Output 02](images/output-02.png)
+
+### Output 03
+
+![Output 03](images/output-03.png)
 
 ---
 
-# Workflow Components
-
----
-
-## 1. Checkpoint Loader
-
-### Purpose
-
-Loads the primary Stable Diffusion model.
-
-### Why this node?
-
-The workflow requires a base model before any image generation can occur.
-
-This node provides:
-
-* Model
-* CLIP
-* VAE
-
-which are required by downstream nodes.
-
-### Output
-
-* MODEL
-* CLIP
-* VAE
-
----
-
-## 2. LoRA Loader
-
-### Purpose
-
-Applies specialized knowledge to the base model.
-
-### Why this node?
-
-Training an entire model is expensive.
-
-LoRA allows style adaptation without retraining the full model.
-
-Examples:
-
-* Realism enhancement
-* Character styles
-* Cinematic lighting
-* Environment styles
-
-### Benefits
-
-* Lightweight
-* Modular
-* Easy experimentation
-
----
-
-## 3. CLIP Text Encode (Positive)
-
-### Purpose
-
-Converts the positive prompt into embeddings.
-
-### Why this node?
-
-The model cannot understand plain text directly.
-
-CLIP converts text into numerical representations that the model can process.
-
-### Example Prompt
+## Workflow Structure
 
 ```text
-cinematic portrait of a warrior king,
-ultra realistic,
-8k,
-golden armor,
-volumetric lighting
+Checkpoint Loader
+        ↓
+LoRA Loader
+        ↓
+Positive Prompt Encoder
+        ↓
+Negative Prompt Encoder
+        ↓
+Empty Latent Image
+        ↓
+KSampler
+        ↓
+VAE Decode
+        ↓
+Upscaler
+        ↓
+Save Image
 ```
 
 ---
 
-## 4. CLIP Text Encode (Negative)
+## Key Features
 
-### Purpose
+### SDXL Integration
 
-Defines unwanted features.
+Utilizes Stable Diffusion XL as the primary image generation model.
 
-### Why this node?
+### LoRA Support
 
-Negative prompts improve output quality by reducing common generation errors.
+Applies specialized visual styles and fine-tuned model enhancements.
 
-### Example Prompt
+### Efficient Sampling
+
+Optimized KSampler settings for improved image quality and generation speed.
+
+### AI Upscaling
+
+Generates images at efficient resolutions and upscales for high-resolution output.
+
+### Reusable Design
+
+Built as a modular workflow that can be expanded with:
+
+* ControlNet
+* IPAdapter
+* Flux
+* Video Generation Pipelines
+* Custom Nodes
+
+---
+
+## Technical Stack
+
+| Category          | Technology    |
+| ----------------- | ------------- |
+| Workflow Engine   | ComfyUI       |
+| Base Model        | SDXL          |
+| Style Enhancement | LoRA          |
+| Sampling          | DPM++ 2M SDE  |
+| Scheduler         | Karras        |
+| Upscaling         | 4x UltraSharp |
+| Version Control   | Git           |
+| Documentation     | Markdown      |
+
+---
+
+## Repository Structure
 
 ```text
-blurry,
-low quality,
-extra fingers,
-watermark,
-text,
-deformed face
+Project-01-ComfyUI-SDXL-LoRA-Upscale/
+│
+├── README.md
+│
+├── docs/
+│   ├── node-explanations.md
+│   └── optimization-notes.md
+│
+├── workflow-json/
+│   └── workflow.json
+│
+├── images/
+│   ├── architecture-diagram.png
+│   ├── workflow.png
+│   ├── output-01.png
+│   ├── output-02.png
+│   └── output-03.png
+│
+└── assets/
 ```
 
 ---
 
-## 5. Empty Latent Image
+## Documentation
 
-### Purpose
+Detailed documentation is available in the following files:
 
-Creates the initial latent canvas.
+### Node Explanations
 
-### Why this node?
-
-The diffusion process requires a latent space to begin image generation.
-
-### Settings
+Provides detailed explanations of every node used in the workflow.
 
 ```text
-Width: 1024
-Height: 1024
-Batch Size: 1
+docs/node-explanations.md
+```
+
+### Optimization Notes
+
+Documents workflow experiments, parameter testing, optimization strategies, and lessons learned.
+
+```text
+docs/optimization-notes.md
 ```
 
 ---
 
-## 6. KSampler
+## Learning Objectives
 
-### Purpose
+This project helped develop practical experience in:
 
-Core image generation node.
-
-### Why this node?
-
-This is where the diffusion process happens.
-
-The model progressively removes noise until a coherent image is created.
-
-### Production Settings
-
-```text
-Steps: 30
-CFG: 7
-Sampler: DPM++ 2M SDE
-Scheduler: Karras
-```
-
-### Why These Values?
-
-#### Steps = 30
-
-Provides a balance between:
-
-* Quality
-* Speed
-
-#### CFG = 7
-
-Maintains prompt adherence while preserving creativity.
-
-#### DPM++ 2M SDE
-
-Produces stable and detailed outputs.
-
-#### Karras Scheduler
-
-Commonly used for high-quality SDXL workflows.
+* ComfyUI Workflow Design
+* Stable Diffusion Architecture
+* LoRA Integration
+* Prompt Engineering
+* Sampling Optimization
+* Production-Oriented Workflow Development
+* AI Pipeline Documentation
 
 ---
 
-## 7. VAE Decode
+## Future Improvements
 
-### Purpose
-
-Converts latent information into a visible image.
-
-### Why this node?
-
-The KSampler output is not an image.
-
-It is latent data.
-
-The VAE Decoder transforms that latent representation into a viewable image.
-
----
-
-## 8. Upscaling
-
-### Purpose
-
-Increase image resolution.
-
-### Why this node?
-
-Generating directly at very high resolutions requires significantly more VRAM and processing time.
-
-Upscaling provides:
-
-* Faster workflow execution
-* Better detail retention
-* Higher final resolution
-
-### Upscale Model
-
-```text
-4x UltraSharp
-```
-
-### Workflow
-
-```text
-1024x1024
-      ↓
-2048x2048
-```
-
----
-
-# Workflow Optimization Decisions
-
-## Why SDXL?
-
-* Strong photorealism
-* Large community support
-* Excellent LoRA ecosystem
-
----
-
-## Why LoRA Instead of Additional Models?
-
-* Faster experimentation
-* Lower storage requirements
-* Modular workflow design
-
----
-
-## Why Generate at 1024 First?
-
-Benefits:
-
-* Lower GPU usage
-* Faster iterations
-* Easier testing
-
----
-
-## Why Upscale Afterwards?
-
-Benefits:
-
-* Better efficiency
-* Improved visual quality
-* Production-friendly workflow
-
----
-
-# Challenges Encountered
-
-### Prompt Overfitting
-
-High CFG values reduced image quality.
-
-Solution:
-
-```text
-CFG = 6-8
-```
-
----
-
-### LoRA Overpowering
-
-High LoRA strength produced unrealistic outputs.
-
-Solution:
-
-```text
-Strength = 0.6 - 0.9
-```
-
----
-
-### Excessive Sampling Steps
-
-Increasing beyond 40 steps produced minimal improvements.
-
-Solution:
-
-```text
-25-30 steps
-```
-
----
-
-# Future Improvements
+Planned enhancements include:
 
 * ControlNet Integration
-* OpenPose Workflow
+* OpenPose Workflows
 * IPAdapter Character Consistency
-* Multi-LoRA Blending
-* Flux Model Migration
-* Video Generation Pipelines
+* Flux Workflows
+* AI Video Generation
+* Custom ComfyUI Nodes
+* Workflow Automation
 
 ---
 
-# Key Learnings
+## Author
 
-* Understanding latent diffusion workflows
-* Prompt engineering techniques
-* LoRA integration strategies
-* Sampling optimization
-* Production-oriented workflow design
-* Workflow scalability and reusability
-
----
-
-# Author
-
-Gowtham Subramanian
+### Gowtham Subramanian
 
 Generative AI Workflow Designer | Technical Artist | Senior Digital Compositor
+
+#### Experience
+
+* DNEG
+* MPC
+* BOT VFX
+* Ingenuity Studios
+
+#### Connect
 
 LinkedIn:
 https://www.linkedin.com/in/gowtham-subramanian-9a141939b/
 
 Showreel:
 https://vimeo.com/858890877
+
+Email:
+[gowthamvfx150290@gmail.com](mailto:gowthamvfx150290@gmail.com)
