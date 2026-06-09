@@ -122,25 +122,23 @@ Built as a modular workflow that can be expanded with:
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 Detailed documentation is available in the following files:
 
-### Node Explanations
+### 🔹 Node Explanations
 
 Provides detailed explanations of every node used in the workflow.
 
-```text
-docs/node-explanations.md
-```
+➡️ [View Node Explanations](docs/node-explanations.md)
 
-### Optimization Notes
+---
+
+### 🔹 Optimization Notes
 
 Documents workflow experiments, parameter testing, optimization strategies, and lessons learned.
 
-```text
-docs/optimization-notes.md
-```
+➡️ [View Optimization Notes](docs/optimization-notes.md)
 
 ---
 
