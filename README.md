@@ -118,32 +118,6 @@ Built as a modular workflow that can be expanded with:
 
 ---
 
-## Repository Structure
-
-```text
-Project-01-ComfyUI-SDXL-LoRA-Upscale/
-│
-├── README.md
-│
-├── docs/
-│   ├── node-explanations.md
-│   └── optimization-notes.md
-│
-├── workflow-json/
-│   └── workflow.json
-│
-├── images/
-│   ├── architecture-diagram.png
-│   ├── workflow.png
-│   ├── output-01.png
-│   ├── output-02.png
-│   └── output-03.png
-│
-└── assets/
-```
-
----
-
 ## Documentation
 
 Detailed documentation is available in the following files:
