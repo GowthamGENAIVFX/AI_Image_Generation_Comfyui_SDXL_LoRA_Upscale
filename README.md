@@ -49,7 +49,7 @@ The workflow integrates:
 
 ### Output 04
 
-![Output 03](images/output_04.png)
+![Output 04](images/output_04.png)
 
 ---
 
