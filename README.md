@@ -29,7 +29,7 @@ The workflow integrates:
 
 ## Workflow Graph
 
-![Workflow](images/workflow.png)
+![Workflow](images/workflow_comfyui.png)
 
 ---
 
