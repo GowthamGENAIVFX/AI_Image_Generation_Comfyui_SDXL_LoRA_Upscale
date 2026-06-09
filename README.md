@@ -130,7 +130,7 @@ Detailed documentation is available in the following files:
 
 Provides detailed explanations of every node used in the workflow.
 
-➡️ [View Node Explanations](docs/node-explanations.md)
+➡️ [View Node Explanations](docs/node_explanations.md)
 
 ---
 
@@ -138,7 +138,7 @@ Provides detailed explanations of every node used in the workflow.
 
 Documents workflow experiments, parameter testing, optimization strategies, and lessons learned.
 
-➡️ [View Optimization Notes](docs/optimization-notes.md)
+➡️ [View Optimization Notes](docs/optimization_notes.md)
 
 ---
 
