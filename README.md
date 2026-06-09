@@ -37,15 +37,19 @@ The workflow integrates:
 
 ### Output 01
 
-![Output 01](images/output-01.png)
+![Output 01](images/output_01.png)
 
 ### Output 02
 
-![Output 02](images/output-02.png)
+![Output 02](images/output_02.png)
 
 ### Output 03
 
-![Output 03](images/output-03.png)
+![Output 03](images/output_03.png)
+
+### Output 04
+
+![Output 03](images/output_04.png)
 
 ---
 
